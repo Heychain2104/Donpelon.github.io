@@ -1,20 +1,117 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego 1</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scratch Juego 1</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    body {
+        text-align: center;
+        background: black;
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        /* quitamos justify-content: center para que los juegos no caigan abajo */
+    }
+
+    #logo {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        width: 120px;
+        z-index: 10;
+    }
+
+    h1 {
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+
+    .scratch-game {
+        margin-top: 0; /* Ajusta si quieres subirlo más */
+    }
+
+    .scratch-game iframe {
+        width: 90%;
+        max-width: 900px;
+        height: 600px; /* Juego más grande */
+    }
+</style>
 </head>
 <body>
-    <img src="logo.png" alt="Mi Logo" id="logo">
-    <h1>Juego 1</h1>
 
-    <div id="juegos-container">
-        <iframe src="https://scratch.mit.edu/projects/1191149394/embed"
-                width="485" height="402"
-                frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen>
-        </iframe>
-    </div>
+<!-- Fondo animado -->
+<canvas id="fondo"></canvas>
+
+<!-- Logo -->
+<img src="logo.png" alt="Logo" id="logo">
+
+<!-- Título RGB -->
+<h1 id="titulo-juego">Scratch Juego 1</h1>
+
+<!-- Juego Scratch centrado -->
+<div class="scratch-game">
+    <iframe src="https://scratch.mit.edu/projects/1190684640/embed"
+            allowtransparency="true"
+            frameborder="0"
+            scrolling="no"
+            allowfullscreen>
+    </iframe>
+</div>
+
+<script>
+// Título RGB animado
+const titulo = document.getElementById("titulo-juego");
+let hue = 0;
+setInterval(() => {
+    titulo.style.color = `hsl(${hue}, 100%, 50%)`;
+    hue = (hue + 1) % 360;
+}, 50);
+
+// Fondo con partículas
+const canvas = document.getElementById("fondo");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particulas = [];
+for(let i=0; i<100; i++){
+    particulas.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*3 + 1,
+        dx: Math.random()*2 - 1,
+        dy: Math.random()*2 - 1
+    });
+}
+
+function animar() {
+    ctx.fillStyle = "rgba(0,0,0,0.2)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    particulas.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fillStyle = "white";
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    });
+    requestAnimationFrame(animar);
+}
+animar();
+
+// Ajuste de canvas al cambiar tamaño de ventana
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+</script>
+
 </body>
 </html>
