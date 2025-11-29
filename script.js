@@ -1,15 +1,3 @@
-// Login básico
-function login() {
-    const user = document.getElementById('usuario').value;
-    const pass = document.getElementById('contrasena').value;
-    if(user && pass){
-        alert("Bienvenido, " + user + "!");
-        document.getElementById('login').style.display = 'none';
-    } else {
-        alert("Introduce usuario y contraseña");
-    }
-}
-
 // Título RGB animado
 let titulo = document.getElementById("titulo");
 let hue = 0;
