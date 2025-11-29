@@ -43,6 +43,29 @@ canvas#fondo {
     margin: 50px auto;
     width: 100%;
 }
+
+/* Sección "Más juegos" */
+.mas-juegos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.mas-juegos img.miniatura-pequena {
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+
+.mas-juegos img.miniatura-pequena:hover {
+    transform: scale(1.1);
+}
 </style>
 </head>
 <body>
@@ -54,6 +77,23 @@ canvas#fondo {
 
 <div class="juego-container">
     <script src="https://cdn.htmlgames.com/embed.js?game=SoccerPinball&bgcolor=black"></script>
+</div>
+
+<!-- Sección Más Juegos -->
+<h2>Más juegos</h2>
+<div class="mas-juegos">
+    <a href="spades-spider-solitaire.html">
+        <img src="thumb-spades.png" alt="Spades Spider" class="miniatura-pequena">
+    </a>
+    <a href="bear-game.html">
+        <img src="thumb-bear.png" alt="Bear Game" class="miniatura-pequena">
+    </a>
+    <a href="juego3.html">
+        <img src="thumb-juego3.png" alt="Juego 3" class="miniatura-pequena">
+    </a>
+    <a href="juego4.html">
+        <img src="thumb-juego4.png" alt="Juego 4" class="miniatura-pequena">
+    </a>
 </div>
 
 <script>
