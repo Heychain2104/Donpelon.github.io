@@ -56,10 +56,23 @@ h1 {
     transform: scale(1.1);
 }
 
+iframe {
+    display: block;
+    margin: 20px auto;
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    width: 90%;       /* ancho adaptable */
+    max-width: 485px; /* ancho máximo */
+    height: 270px;    /* altura proporcional */
+}
+
 @media (max-width: 480px) {
+    h1 {
+        font-size: 1.4rem;
+    }
+
     .boton-juego {
         padding: 15px 25px;
         font-size: 1rem;
     }
 }
-
