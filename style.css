@@ -1,3 +1,4 @@
+/* Estilo general */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -32,7 +33,7 @@ h1 {
     100% { background-position: 0% 50%; }
 }
 
-/* Botones de juegos */
+/* Miniaturas de juegos */
 .botones-juegos {
     display: flex;
     flex-wrap: wrap;
@@ -40,39 +41,35 @@ h1 {
     gap: 20px;
 }
 
-.boton-juego {
-    display: inline-block;
-    background-color: #4CAF50;
-    color: white;
-    padding: 20px 40px;
-    text-decoration: none;
-    font-size: 1.2rem;
-    border-radius: 10px;
-    transition: transform 0.2s, background-color 0.2s;
+.miniatura-juego {
+    width: 200px;
+    height: auto;
+    border: 3px solid #4CAF50;
+    border-radius: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.boton-juego:hover {
-    background-color: #45a049;
+.miniatura-juego:hover {
     transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
+/* Iframes para las páginas de juego */
 iframe {
     display: block;
     margin: 20px auto;
     border: 2px solid #4CAF50;
     border-radius: 10px;
-    width: 90%;       /* ancho adaptable */
-    max-width: 485px; /* ancho máximo */
-    height: 270px;    /* altura proporcional */
+    width: 90%;
+    max-width: 485px;
+    height: 270px;
 }
 
 @media (max-width: 480px) {
     h1 {
         font-size: 1.4rem;
     }
-
-    .boton-juego {
-        padding: 15px 25px;
-        font-size: 1rem;
+    .miniatura-juego {
+        width: 140px;
     }
 }
