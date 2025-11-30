@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="styles.css">
+<script src="scripts.js"></script>
+</head>
+<body>
+
+<div class="card">
+    <h1>Ranking Global</h1>
+    <div id="lista"></div>
+    <br>
+    <a href="perfil.html">Volver</a>
+</div>
+
+<script>
+let db = JSON.parse(localStorage.getItem("usuarios"));
+let arr = Object.entries(db).sort((a,b)=> b[1].puntos - a[1].puntos);
+
+let html="";
+arr.forEach(([user,data],i)=>{
+    html += `<p><b>${i+1}.</b> ${data.nombre} — ${data.puntos} pts</p>`;
+});
+
+lista.innerHTML = html;
+</script>
+
+</body>
+</html>
