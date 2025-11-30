@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="styles.css">
+<script src="scripts.js"></script>
+</head>
+<body>
+
+<div class="card">
+    <h1>Mi Perfil</h1>
+
+    <img id="avatar" width="120" height="120" style="border-radius:50%;border:3px solid white;">
+    <br><br>
+
+    <input id="nombre">
+
+    <input type="file" id="foto">
+
+    <h3>Puntos: <span id="pts"></span></h3>
+    <h3>Nivel: <span id="lvl"></span></h3>
+
+    <button onclick="guardar()">Guardar</button>
+    <button onclick="salir()">Cerrar sesión</button>
+
+    <br><br>
+    <a href="ranking.html">Ranking</a> |
+    <a href="amigos.html">Amigos</a> |
+    <a href="chat.html">Chat</a>
+</div>
+
+<script>
+if (!localStorage.getItem("sesion")) location="login.html";
+
+let u = getUser();
+avatar.src = u.avatar;
+nombre.value = u.nombre;
+pts.textContent = u.puntos;
+lvl.textContent = u.nivel;
+
+foto.addEventListener("change", e=>{
+    const f = e.target.files[0];
+    const r = new FileReader();
+    r.onload = ()=> {
+        u.avatar = r.result;
+        avatar.src = r.result;
+    };
+    r.readAsDataURL(f);
+});
+
+function guardar(){
+    u.nombre = nombre.value;
+    saveUser(u);
+    alert("Guardado ✔");
+}
+
+function salir() {
+    localStorage.removeItem("sesion");
+    location="login.html";
+}
+</script>
+
+</body>
+</html>
