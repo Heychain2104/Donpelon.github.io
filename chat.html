@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="styles.css">
+<script src="scripts.js"></script>
+</head>
+<body>
+
+<div class="card">
+    <h1>Chat</h1>
+
+    <input id="para" placeholder="Enviar a...">
+    <input id="msg" placeholder="Mensaje">
+    <button onclick="send()">Enviar</button>
+
+    <h3>Mensajes recibidos:</h3>
+    <div id="msgs"></div>
+
+    <br><a href="perfil.html">Volver</a>
+</div>
+
+<script>
+let u = getUser();
+
+function send() {
+    if (enviarMensaje(para.value.trim(), msg.value.trim())) {
+        alert("Enviado ✔");
+    } else {
+        alert("No se pudo enviar");
+    }
+}
+
+msgs.innerHTML = u.mensajes.map(m=>`
+    <p><b>${m.de}</b>: ${m.texto} <br><small>${m.fecha}</small></p>
+`).join("");
+</script>
+
+</body>
+</html>
