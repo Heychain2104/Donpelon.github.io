@@ -1,3 +1,5 @@
+Index.html
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,31 +32,6 @@ body { background:black; color:white; font-family:Arial, sans-serif; margin:0; p
 .juegos img.miniatura:hover { transform:scale(1.1); }
 canvas#fondo { position:fixed; top:0; left:0; z-index:-1; }
 
-/* Perfil usuario arriba a la derecha */
-#perfil {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(0,0,0,0.5);
-    padding: 5px 10px;
-    border-radius: 10px;
-    z-index: 20;
-    color: white;
-    font-weight: bold;
-}
-#perfil img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-#perfil span {
-    color: white;
-}
-
 /* Responsive */
 @media(max-width:1200px){.juegos{grid-template-columns:repeat(4,1fr);} }
 @media(max-width:800px){ .juegos{grid-template-columns:repeat(2,1fr);} }
@@ -74,12 +51,6 @@ if (!localStorage.getItem("sesion")) {
 <canvas id="fondo"></canvas>
 <img src="logo.png" alt="Logo" id="logo">
 <h1 id="titulo">Bienvenido a mi página de juegos</h1>
-
-<!-- Contenedor del perfil -->
-<div id="perfil">
-    <img id="perfil-foto" src="img/default.png" alt="Foto de perfil">
-    <span id="perfil-nombre"></span>
-</div>
 
 <div class="juegos">
     <a href="scratch-juego1.html"><img src="thumb-scratch1.png" class="miniatura" alt="Scratch 1"></a>
@@ -161,29 +132,6 @@ if (user) {
     data.puntos++;
     localStorage.setItem("user_" + user, JSON.stringify(data));
 }
-
-// ⭐ MOSTRAR PERFIL ARRIBA A LA DERECHA
-window.addEventListener("load", () => {
-    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
-    const sesion = localStorage.getItem("sesion");
-
-    if (!sesion || !usuarios[sesion]) {
-        console.warn("Usuario no encontrado en localStorage:", sesion);
-        return;
-    }
-
-    const usuario = usuarios[sesion];
-
-    const foto = document.getElementById("perfil-foto");
-    const nombre = document.getElementById("perfil-nombre");
-
-    // Foto: si avatar existe, úsala; si no, usa default.png
-    foto.src = usuario.avatar ? usuario.avatar : "img/default.png";
-
-    // Nombre en blanco
-    nombre.textContent = usuario.nombre || sesion;
-    nombre.style.color = "white";
-});
 </script>
 
 </body>
