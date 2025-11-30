@@ -31,10 +31,18 @@ body { background:black; color:white; font-family:Arial, sans-serif; margin:0; p
 canvas#fondo { position:fixed; top:0; left:0; z-index:-1; }
 
 /* Responsive */
-@media(max-width:1200px){.juegos{grid-template-columns:repeat(4,1fr);}}
-@media(max-width:800px){.juegos{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:500px){.juegos{grid-template-columns:1fr;}}
+@media(max-width:1200px){.juegos{grid-template-columns:repeat(4,1fr);} }
+@media(max-width:800px){ .juegos{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:500px){ .juegos{grid-template-columns:1fr;} }
 </style>
+
+<!-- 🔒 PROTECCIÓN: SI NO HAY SESIÓN → LOGIN -->
+<script>
+if (!localStorage.getItem("sesion")) {
+    window.location.href = "login.html";
+}
+</script>
+
 </head>
 <body>
 
@@ -58,16 +66,15 @@ canvas#fondo { position:fixed; top:0; left:0; z-index:-1; }
     <a href="Basketball.html"><img src="basketball.png" class="miniatura" alt="Basketball"></a>
     <a href="Red-Ball-4.html"><img src="Red-Ball-4.png" class="miniatura" alt="Red Ball 4"></a>
     <a href="slope-ball.html"><img src="slope-ball.png" class="miniatura" alt="Slope Ball"></a>
-    <a href="Moto.html"><img src="Moto.png" class="miniatura" alt="Slope Ball"></a>
-    <a href="Cars.html"><img src="Cars.png" class="miniatura" alt="Slope Ball"></a>
-    <a href="Parking.html"><img src="Parking.png" class="miniatura" alt="Slope Ball"></a>
-    <a href="fire.html"><img src="fire.png" class="miniatura" alt="Slope Ball"></a>
-    <a href="hole.html"><img src="hole.png" class="miniatura" alt="Slope Ball"></a>
-    <a href="foot.html"><img src="foot.png" class="miniatura" alt="Slope Ball"></a>
+    <a href="Moto.html"><img src="Moto.png" class="miniatura" alt="Moto"></a>
+    <a href="Cars.html"><img src="Cars.png" class="miniatura" alt="Cars"></a>
+    <a href="Parking.html"><img src="Parking.png" class="miniatura" alt="Parking"></a>
+    <a href="fire.html"><img src="fire.png" class="miniatura" alt="Fire"></a>
+    <a href="hole.html"><img src="hole.png" class="miniatura" alt="Hole"></a>
+    <a href="foot.html"><img src="foot.png" class="miniatura" alt="Foot"></a>
     <a href="volleyball.html"><img src="volleyball.png" class="miniatura" alt="Voleyball Random"></a>
-    <a href="Geometry.html"><img src="Geometry.png" class="miniatura" alt="Voleyball Random"></a>
-    <a href="Haunted-House.html"><img src="haunted-house.png" class="miniatura" alt="Voleyball Random"></a>
-    <!-- Agrega más juegos aquí -->
+    <a href="Geometry.html"><img src="Geometry.png" class="miniatura" alt="Geometry Dash"></a>
+    <a href="Haunted-House.html"><img src="haunted-house.png" class="miniatura" alt="Haunted House"></a>
 </div>
 
 <script>
@@ -109,6 +116,14 @@ function animar(){
 }
 animar();
 window.addEventListener('resize',()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
+
+// ⭐ SISTEMA DE PUNTOS
+let user = localStorage.getItem("sesion");
+if (user) {
+    let data = JSON.parse(localStorage.getItem("user_" + user));
+    data.puntos++;
+    localStorage.setItem("user_" + user, JSON.stringify(data));
+}
 </script>
 
 </body>
