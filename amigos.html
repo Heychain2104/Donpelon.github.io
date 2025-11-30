@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="styles.css">
+<script src="scripts.js"></script>
+</head>
+<body>
+
+<div class="card">
+    <h1>Amigos</h1>
+
+    <input id="nuevo" placeholder="Añadir amigo">
+    <button onclick="add()">Agregar</button>
+
+    <h3>Mis amigos:</h3>
+    <div id="lista"></div>
+
+    <br><a href="perfil.html">Volver</a>
+</div>
+
+<script>
+let u = getUser();
+
+function add(){
+    const n = nuevo.value.trim();
+    if (agregarAmigo(n)) {
+        alert("Agregado");
+        location.reload();
+    } else {
+        alert("No se pudo agregar");
+    }
+}
+
+lista.innerHTML = u.amigos.map(a=>`<p>${a}</p>`).join("");
+</script>
+
+</body>
+</html>
