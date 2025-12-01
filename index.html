@@ -1,5 +1,3 @@
-Index.html
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,6 +30,30 @@ body { background:black; color:white; font-family:Arial, sans-serif; margin:0; p
 .juegos img.miniatura:hover { transform:scale(1.1); }
 canvas#fondo { position:fixed; top:0; left:0; z-index:-1; }
 
+/* Panel superior usuario */
+#user-panel {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0,0,0,0.6);
+    padding: 5px 10px;
+    border-radius: 12px;
+    border: 1px solid white;
+    z-index: 20;
+}
+#user-foto {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+}
+#user-nombre { font-weight: bold; }
+#user-puntos { color: gold; }
+
 /* Responsive */
 @media(max-width:1200px){.juegos{grid-template-columns:repeat(4,1fr);} }
 @media(max-width:800px){ .juegos{grid-template-columns:repeat(2,1fr);} }
@@ -50,9 +72,20 @@ if (!localStorage.getItem("sesion")) {
 
 <canvas id="fondo"></canvas>
 <img src="logo.png" alt="Logo" id="logo">
+
+<!-- 🆕 PANEL SUPERIOR USUARIO -->
+<div id="user-panel">
+    <img id="user-foto" src="default.png" alt="Foto">
+    <div>
+        <div id="user-nombre">Usuario</div>
+        <div id="user-puntos">0 ⭐</div>
+    </div>
+</div>
+
 <h1 id="titulo">Bienvenido a mi página de juegos</h1>
 
 <div class="juegos">
+    <!-- Tus juegos -->
     <a href="scratch-juego1.html"><img src="thumb-scratch1.png" class="miniatura" alt="Scratch 1"></a>
     <a href="scratch-juego2.html"><img src="thumb-scratch2.png" class="miniatura" alt="Scratch 2"></a>
     <a href="juegos/pixel-invaders-master/index.html"><img src="thumb-pixelinvaders.png" class="miniatura" alt="Pixel Invaders"></a>
@@ -86,7 +119,7 @@ if (!localStorage.getItem("sesion")) {
 </div>
 
 <script>
-// Título RGB animado
+// 🔹 TÍTULO RGB
 const titulo = document.getElementById("titulo");
 let hue=0;
 setInterval(()=>{
@@ -94,7 +127,7 @@ setInterval(()=>{
     hue=(hue+1)%360;
 },50);
 
-// Fondo partículas
+// 🔹 FONDO PARTÍCULAS
 const canvas=document.getElementById("fondo");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth; canvas.height=window.innerHeight;
@@ -125,13 +158,34 @@ function animar(){
 animar();
 window.addEventListener('resize',()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
 
-// ⭐ SISTEMA DE PUNTOS
+// 🔹 SISTEMA DE PUNTOS Y PANEL USUARIO
 let user = localStorage.getItem("sesion");
 if (user) {
     let data = JSON.parse(localStorage.getItem("user_" + user));
     data.puntos++;
     localStorage.setItem("user_" + user, JSON.stringify(data));
+
+    // Actualizar panel superior
+    const userNombre = document.getElementById("user-nombre");
+    const userPuntos = document.getElementById("user-puntos");
+    const userFoto = document.getElementById("user-foto");
+    if(userNombre) userNombre.textContent = data.nombre;
+    if(userPuntos) userPuntos.textContent = "⭐ " + data.puntos;
+    if(userFoto) userFoto.src = data.foto || "default.png";
 }
+
+// 🔹 ACTUALIZAR PUNTOS AUTOMÁTICAMENTE CADA 30s
+setInterval(()=>{
+    let user = localStorage.getItem("sesion");
+    if(user){
+        let data = JSON.parse(localStorage.getItem("user_" + user));
+        data.puntos++;
+        localStorage.setItem("user_" + user, JSON.stringify(data));
+
+        const userPuntos = document.getElementById("user-puntos");
+        if(userPuntos) userPuntos.textContent = "⭐ " + data.puntos;
+    }
+},30000);
 </script>
 
 </body>
